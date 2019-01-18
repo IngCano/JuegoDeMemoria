@@ -4,10 +4,6 @@ import java.awt.Color;
 
 public class ClickableBox extends Clickable{
 	
-	public int xPos;
-	public int yPos;
-	public int xSize;
-	public int ySize;
 	public Color defaultColor;
 	
 	public ClickableBox() {
