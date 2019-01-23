@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import controller.Mouse;
+
 public class Game {
 	
 	public ArrayList<ClickableBox> boxes;
@@ -25,4 +27,17 @@ public class Game {
 			g.fillRect(b.xPos, b.yPos, b.xSize, b.ySize);
 		}
 	}
+	
+	public void checkForUserEvents(Mouse mouseController) {
+		if(mouseController.mouseReleased) {
+    		mouseController.mouseReleased = false;
+    		for(ClickableBox b : boxes) {
+    			if((mouseController.x > b.xPos && mouseController.x < (b.xPos+b.xSize)) &&
+    					(mouseController.y > b.yPos && mouseController.y < (b.yPos+b.ySize))) {
+    				b.clicked = !b.clicked;
+    			}
+    		}
+    	}
+	}
+	
 }

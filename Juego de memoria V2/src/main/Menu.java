@@ -25,8 +25,8 @@ public class Menu {
 		if(g != null) {
 			Panel.fillInBlack(g);
 			g.setColor(Color.GREEN);
-			g.drawChars(title.toCharArray(), 0, 5, 100, 100);
-			
+			g.drawChars(title.toCharArray(), 0, 11, 100, 100);
+			g.dispose();
 		}
 	}
 }

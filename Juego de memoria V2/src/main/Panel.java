@@ -16,14 +16,17 @@ public class Panel extends JPanel{
 	private BufferedImage paintBox;
 	private Mouse mouseController;
 	private Game game;
+	private Menu menu;
+	private boolean visiblePanel; //False: Menu; True: Game;
 	
 	public Panel() {
 		this.setSize(WIDTH, HEIGHT);
 		paintBox = new BufferedImage(Panel.WIDTH, Panel.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		game = new Game();
+		menu = new Menu();
 		mouseController = new Mouse();
 		this.addMouseListener(mouseController);
-		
+		visiblePanel = false;
 	}
 	
 	public void render() {
@@ -31,17 +34,17 @@ public class Panel extends JPanel{
 		if(graphicsFromPanel != null) {
 			Graphics graphicsFromBox = paintBox.getGraphics();
             if(graphicsFromBox != null){
+            	
             	fillInBlack(graphicsFromBox);
-            	if(mouseController.mouseReleased) {
-            		mouseController.mouseReleased = false;
-            		for(ClickableBox b : game.boxes) {
-            			if((mouseController.x > b.xPos && mouseController.x < (b.xPos+b.xSize)) &&
-            					(mouseController.y > b.yPos && mouseController.y < (b.yPos+b.ySize))) {
-            				b.clicked = !b.clicked;
-            			}
-            		}
+            	
+            	if(!visiblePanel) {
+            		menu.paintMenu();
+            		graphicsFromBox.drawImage(menu.mainMenuImage, 0, 0, null);
+            		
+            	} else {
+            		game.paintBoxes(graphicsFromBox);
             	}
-            	game.paintBoxes(graphicsFromBox);
+            	
             	graphicsFromBox.dispose();
             }
             graphicsFromPanel.drawImage(paintBox, 0, 0, null);
