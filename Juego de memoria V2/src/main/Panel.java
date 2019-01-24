@@ -17,7 +17,7 @@ public class Panel extends JPanel{
 	private Mouse mouseController;
 	private Game game;
 	private Menu menu;
-	private boolean visiblePanel; //False: Menu; True: Game;
+	public static boolean visiblePanel; //False: Menu; True: Game;
 	
 	public Panel() {
 		this.setSize(WIDTH, HEIGHT);
@@ -38,10 +38,12 @@ public class Panel extends JPanel{
             	fillInBlack(graphicsFromBox);
             	
             	if(!visiblePanel) {
+            		menu.checkForMouseEvents(mouseController);
             		menu.paintMenu();
             		graphicsFromBox.drawImage(menu.mainMenuImage, 0, 0, null);
             		
             	} else {
+            		game.checkForUserEvents(mouseController);
             		game.paintBoxes(graphicsFromBox);
             	}
             	
@@ -55,5 +57,10 @@ public class Panel extends JPanel{
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, WIDTH, HEIGHT);
     }
+	
+	public static void fillInGivenColor(Graphics g, Color c) {
+		g.setColor(c);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+	}
 	
 }
