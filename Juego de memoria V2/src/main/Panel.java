@@ -40,11 +40,23 @@ public class Panel extends JPanel{
             	if(!visiblePanel) {
             		menu.checkForMouseEvents(mouseController);
             		menu.paintMenu();
+            		if(menu.newGame) game = new Game();
             		graphicsFromBox.drawImage(menu.mainMenuImage, 0, 0, null);
             		
             	} else {
-            		game.checkForUserEvents(mouseController);
-            		game.paintBoxes(graphicsFromBox);
+            		if(!game.loss){
+            			if(game.cycleDone) {
+            				if(game.generateStep)
+            					game.calculateNewStep();
+                    		game.showAnimationCycle();
+                		}
+                		game.checkForUserEvents(mouseController);
+                		game.paintScore(graphicsFromBox);
+                		game.paintBoxes(graphicsFromBox);            			
+            		} else {
+            			game.showYouLoseButton(graphicsFromBox);
+            			game.checkForUserEvents(mouseController);
+            		}
             	}
             	
             	graphicsFromBox.dispose();

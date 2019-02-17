@@ -18,9 +18,11 @@ public class Menu {
 	private ClickableBox menuExit;
 	private ClickableBox menuScore;
 	
+	public boolean newGame;
 	public BufferedImage mainMenuImage;
 	
 	public Menu() {
+		newGame = false;
 		mainMenuImage = new BufferedImage(Panel.WIDTH, Panel.HEIGHT, BufferedImage.TYPE_INT_RGB);
 		try {
 			menuTitle = new ClickableBoxImage(ImageIO.read(new File("src/images/crackman.regular.png")));
@@ -49,6 +51,7 @@ public class Menu {
 					(mouseController.y > menuTitle.yPos && mouseController.y < (menuTitle.yPos + menuTitle.image.getHeight()))) {
 				menuTitle.clicked =! menuTitle.clicked;
 				Panel.visiblePanel = true;
+				newGame = true;
 			}
 		}
 	}

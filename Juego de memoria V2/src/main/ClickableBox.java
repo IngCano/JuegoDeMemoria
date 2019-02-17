@@ -5,6 +5,7 @@ import java.awt.Color;
 public class ClickableBox extends Clickable{
 	
 	public Color defaultColor;
+	public boolean isVisible;
 	
 	public ClickableBox() {
 		xPos = 0;
@@ -12,6 +13,7 @@ public class ClickableBox extends Clickable{
 		xSize = 0;
 		ySize = 0;
 		clicked = false;
+		isVisible = false;
 	}
 	
 	public ClickableBox(int x, int y) {
@@ -20,6 +22,7 @@ public class ClickableBox extends Clickable{
 		xSize = x;
 		ySize = y;
 		clicked = false;
+		isVisible = false;
 	}
 	
 	public ClickableBox(int x, int y, Color c) {
@@ -29,6 +32,7 @@ public class ClickableBox extends Clickable{
 		ySize = y;
 		this.defaultColor = c;
 		clicked = false;
+		isVisible = false;
 	}
 	
 	public ClickableBox(int xPos, int yPos, int xSize, int ySize, Color c) {
@@ -38,5 +42,10 @@ public class ClickableBox extends Clickable{
 		this.ySize = ySize;
 		this.defaultColor = c;
 		clicked = false;
+		isVisible = false;
+	}
+	
+	public void calculateVisibility() {
+		if(clicked) isVisible = true; else isVisible = false;
 	}
 }
